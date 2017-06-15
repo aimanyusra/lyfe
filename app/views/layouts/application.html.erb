@@ -9,6 +9,14 @@
   </head>
 
   <body>
+  <div id="header">
+  <%= current_user.first_name + ' ' + current_user.first_name %>
+    <% if signed_in? -%>
+      <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
+    <% else -%>
+      <%= link_to t(".sign_in"), sign_in_path %>
+    <% end -%>
+  </div>
     <%= yield %>
   </body>
 </html>

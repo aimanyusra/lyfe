@@ -1,0 +1,65 @@
+<%= form_for(event) do |f| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.text_field :status %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :start_date %>
+    <%= f.date_select :start_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_date %>
+    <%= f.date_select :end_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </div>
+
+  <div class="field">
+    <%= f.label :time %>
+    <%= f.text_field :time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :age_limit %>
+    <%= f.number_field :age_limit %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </div>
+
+  <%= f.hidden_field :host_id, :value => current_user.id %>
+  <%= hidden_field_tag 'host', current_user.id  %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  type: 
+  description: MyString
+  start_date: 2017-06-15
+  end_date: 2017-06-15
+  location: MyString
+  time: MyString
+  age_limit: 1
+  price: 
+
+two:
+  title: MyString
+  type: 
+  description: MyString
+  start_date: 2017-06-15
+  end_date: 2017-06-15
+  location: MyString
+  time: MyString
+  age_limit: 1
+  price: 
