@@ -38,7 +38,8 @@ class UsersController < Clearance::UsersController
 
 	def show
 		@user = User.find(params[:id])
-		# @bookings = @user.bookings use for events
+		@events = Event.where(host_id: current_user.id)
+		@eventusers = EventUser.where(user_id: current_user.id)
 	end
 	
 	private
