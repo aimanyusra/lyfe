@@ -7,14 +7,14 @@ class UsersController < Clearance::UsersController
 		@user = User.new(user_params)
 		if @user.save
 			sign_in @user
-			redirect 'users#show'
+			redirect_to 'users#show'
 		else
 			# @user.save
 			# respond_to do |format|
 			# 	format.html {render template: "user/new"}
 			# 	format.js 
 			# end
-			render template: "user/new"
+			render template: "users/new"
 		end
 	end
 
