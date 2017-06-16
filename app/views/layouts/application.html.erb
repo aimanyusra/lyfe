@@ -10,8 +10,9 @@
 
   <body>
   <div id="header">
-  <%= current_user.first_name + ' ' + current_user.last_name %>
+ 
     <% if signed_in? -%>
+     <%= current_user.first_name + ' ' + current_user.last_name %>
       <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
     <% else -%>
       <%= link_to t(".sign_in"), sign_in_path %>
