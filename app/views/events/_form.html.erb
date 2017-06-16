@@ -56,6 +56,11 @@
     <%= f.text_field :price %>
   </div>
 
+  <div class="field">
+    <%= f.label :tags %>
+    <%= f.text_field :tags %>
+  </div>
+
   <%= f.hidden_field :host_id, :value => current_user.id %>
   <%= hidden_field_tag 'host', current_user.id  %>
 
