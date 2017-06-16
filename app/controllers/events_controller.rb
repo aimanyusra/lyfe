@@ -23,8 +23,17 @@ class EventsController < ApplicationController
           @events << x
         end
       end
-    else
-      @events = Event.all
+    Event.all.each do |x|
+      if @joined_event_id.include? x.id
+        # do nothing
+      else
+        @events << x
+      end
+    end
+      respond_to do |format|
+      format.json 
+      format.html
+    end
   end
 
   end
