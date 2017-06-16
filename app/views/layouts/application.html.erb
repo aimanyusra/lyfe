@@ -27,6 +27,15 @@
       <%= link_to t(".sign_in"), sign_in_path %>
     <% end -%>
   </div>
+
+
+  <%# if signed_in? %>
+    <%#= link_to 'edit', edit_user_path(current_user) %>
+  <%# end %>
+  <br>
+    <%= link_to 'home', root_path %>
+
+
     <%= yield %>
   </body>
 </html>
