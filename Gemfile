@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # fullcalendar gem
+gem 'momentjs-rails'
 gem 'fullcalendar-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
