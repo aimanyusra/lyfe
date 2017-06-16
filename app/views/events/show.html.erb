@@ -50,5 +50,10 @@
   <%= @event.tags %>
 </p>
 
+<p>
+  <strong>Current Participating Members:</strong>
+  <%= @joined.count%>
+</p>
+
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

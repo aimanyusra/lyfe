@@ -4,6 +4,16 @@
     <title>GroupProject</title>
     <%= csrf_meta_tags %>
 
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+    <!-- Jquery js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <!-- Bootstrap js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -19,6 +29,15 @@
       <%= link_to t(".sign_in"), sign_in_path %>
     <% end -%>
   </div>
+
+
+  <%# if signed_in? %>
+    <%#= link_to 'edit', edit_user_path(current_user) %>
+  <%# end %>
+  <br>
+    <%= link_to 'home', root_path %>
+
+
     <%= yield %>
   </body>
 </html>
