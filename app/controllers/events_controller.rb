@@ -32,6 +32,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+   @joined = EventUser.all
   end
 
   # GET /events/new
@@ -50,7 +51,7 @@ class EventsController < ApplicationController
     @event.tags << event_params['tags']
     @tag = Tag.create(desc: event_params['tags'])
     EventTag.create(event_id: @event.id, tag_id: @tag.id)
-    byebug
+
 
     respond_to do |format|
       if @event.save
