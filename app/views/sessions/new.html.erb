@@ -1,0 +1,11 @@
+<div class="container">
+	<div id="clearance" class="sign-in">
+	  <h2><%= t(".title") %></h2>
+
+	  <%= render partial: '/sessions/form' %>
+	  <%= link_to "Sign in with Facebook", "/auth/facebook" %>
+	  <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+
+	</div>
+</div>
+
