@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615210645) do
+ActiveRecord::Schema.define(version: 20170616073409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authentications", force: :cascade do |t|
+    t.string   "uid"
+    t.string   "token"
+    t.string   "provider"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_authentications_on_user_id", using: :btree
+  end
 
   create_table "event_tags", force: :cascade do |t|
     t.integer  "event_id"
@@ -57,16 +67,18 @@ ActiveRecord::Schema.define(version: 20170615210645) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "email",                          null: false
-    t.string   "encrypted_password", limit: 128, null: false
+    t.string   "encrypted_password", limit: 128
     t.string   "confirmation_token", limit: 128
     t.string   "remember_token",     limit: 128, null: false
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "age"
+    t.string   "gender"
     t.index ["email"], name: "index_users_on_email", using: :btree
     t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end
 
+  add_foreign_key "authentications", "users"
   add_foreign_key "event_tags", "events"
   add_foreign_key "event_tags", "tags"
   add_foreign_key "event_users", "events"
