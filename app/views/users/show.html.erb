@@ -1,8 +1,8 @@
 <h1><%= @user.first_name + ' ' + @user.last_name %></h1>
-
-<%= link_to 'Make an Act', new_event_path %>
 <br>
 
+<% if current_user %>
+<%= link_to 'Make an Act', new_event_path %>
 <h1>Your Acts</h1>
 <table>
   <thead>
@@ -41,8 +41,9 @@
 </table>
 
 <br>
-<h1>You joined the following Acts</h1>
-<% @eventusers.each do |x| %>
-	<%= p Event.find(x.event_id).title %>
-	<br>
-	<%end%>
+  <h1>You joined the following Acts</h1>
+    <% @eventusers.each do |x| %>
+    	<%= p Event.find(x.event_id).title %>
+  	<br>
+  	<%end%>
+<%end%>
