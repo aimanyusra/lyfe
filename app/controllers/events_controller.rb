@@ -32,7 +32,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-   @joined = @joined_event_users_id
+    @joined = EventUser.where(event_id:params[:id]).count
   end
 
   # GET /events/new
