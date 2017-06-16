@@ -4,24 +4,29 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @joined_event = []
-    @joined = EventUser.where(user_id: current_user.id)
-    @joined.each do |x|
-      @joined_event << Event.find(x.event_id)
-    end
+    if current_user
+      @joined_event = []
+      @joined = EventUser.where(user_id: current_user.id)
+      @joined.each do |x|
+        @joined_event << Event.find(x.event_id)
+      end
 
-    @events = []
-    @joined_event_id = []
-    @joined.each do |y|
-        @joined_event_id << y.event_id
+      @events = []
+      @joined_event_id = []
+      @joined.each do |y|
+          @joined_event_id << y.event_id
+        end
+      Event.all.each do |x|
+        if @joined_event_id.include? x.id
+          # do nothing
+        else
+          @events << x
+        end
       end
-    Event.all.each do |x|
-      if @joined_event_id.include? x.id
-        # do nothing
-      else
-        @events << x
-      end
-    end
+    else
+      @events = Event.all
+  end
+
   end
 
   # GET /events/1
