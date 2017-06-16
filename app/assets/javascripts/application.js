@@ -17,4 +17,8 @@
 //= require moment
 //= require fullcalendar
 //= require fullcalendar/gcal
-$(function() { $('#calendar').fullCalendar(); })
+$(document).ready(function(){
+  $('#calendar').fullCalendar({
+    events: '/events.json'
+  });
+});

@@ -22,6 +22,10 @@ class EventsController < ApplicationController
         @events << x
       end
     end
+      respond_to do |format|
+      format.json 
+      format.html
+    end
   end
 
   # GET /events/1
