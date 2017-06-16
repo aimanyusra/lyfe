@@ -5,4 +5,11 @@ class EventUsersController < ApplicationController
 	end
 	# used show because it has /:id as params
 	# looks like no need strong params if not using form_for
+
+	def destroy
+		@attendence = EventUser.where(event_id: params[:id])
+		@attendence = @attendence.where(user_id: current_user.id)
+		@attendence[0].destroy
+		redirect_to events_path
+	end
 end
