@@ -3,4 +3,6 @@ class EventUsersController < ApplicationController
 		EventUser.create(event_id: params[:id], user_id: current_user.id)
 		redirect_to events_path
 	end
+	# used show because it has /:id as params
+	# looks like no need strong params if not using form_for
 end

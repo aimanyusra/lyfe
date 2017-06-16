@@ -4,7 +4,24 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @joined_event = []
+    @joined = EventUser.where(user_id: current_user.id)
+    @joined.each do |x|
+      @joined_event << Event.find(x.event_id)
+    end
+
+    @events = []
+    @joined_event_id = []
+    @joined.each do |y|
+        @joined_event_id << y.event_id
+      end
+    Event.all.each do |x|
+      if @joined_event_id.include? x.id
+        # do nothing
+      else
+        @events << x
+      end
+    end
   end
 
   # GET /events/1
@@ -25,6 +42,10 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
+    @event.tags << event_params['tags']
+    @tag = Tag.create(desc: event_params['tags'])
+    EventTag.create(event_id: @event.id, tag_id: @tag.id)
+    byebug
 
     respond_to do |format|
       if @event.save
@@ -35,6 +56,9 @@ class EventsController < ApplicationController
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
+
+
+
   end
 
   # PATCH/PUT /events/1
@@ -69,6 +93,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :status, :description, :start_date, :end_date, :location, :time, :age_limit, :price, :host_id)
+      params.require(:event).permit(:title, :status, :description, :start_date, :end_date, :location, :time, :age_limit, :price, :host_id, :tags)
     end
 end
