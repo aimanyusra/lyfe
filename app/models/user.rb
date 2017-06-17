@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   include Clearance::User
 
+  mount_uploader :avatar, AvatarUploader
+
   has_many :event_users, dependent: :destroy
   has_many :events, through: :event_users, dependent: :destroy
 
@@ -14,14 +16,16 @@ class User < ApplicationRecord
 				last_name: auth_hash[:extra]["raw_info"].last_name, 
 				email: auth_hash["extra"]["raw_info"]["email"], 
 				age: auth_hash[:extra]["raw_info"]["age_range"].min[1], 
-				gender: auth_hash[:extra]["raw_info"].gender)
+				gender: auth_hash[:extra]["raw_info"].gender,
+				remote_avatar_url: auth_hash.info.image)
 	    user.authentications << authentication
 	  else
 			user = User.create!(
 				first_name: auth_hash.info.first_name, 
 				last_name: auth_hash.info.last_name, 
 				email: auth_hash.info.email, 
-				gender: auth_hash.extra.raw_info.gender)
+				gender: auth_hash.extra.raw_info.gender,
+				remote_avatar_url: auth_hash.info.image)
 	    user.authentications << authentication
 	  end	
 	  return user   	

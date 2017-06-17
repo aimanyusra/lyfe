@@ -22,3 +22,9 @@
   <%= form.label :password %>
   <%= form.password_field :password %>
 </div>
+
+<div class="avatar-field">
+  <%= form.label :avatar %>
+  <%= image_tag(@user.avatar_url) if @user.avatar? %>
+  <%= form.text_field :remote_avatar_url %>
+</div>
