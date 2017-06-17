@@ -41,7 +41,9 @@
                 <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                 <%end%>
                 <% end %>
+                <% if signed_in? %>
                 <td><%= link_to 'Join', event_user_path(event), data: { confirm: 'You sure going?' } %></td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>
@@ -97,6 +99,7 @@
    </div> <!-- end of row -->
 </div> <!-- end of container -->
 <br>
+
 
 <%= link_to 'New Event', new_event_path %>
 
