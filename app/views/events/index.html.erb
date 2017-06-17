@@ -93,6 +93,8 @@
 
 <br>
 
-<%= link_to 'New Event', new_event_path %>
+<% if current_user %>
+  <%= link_to 'New Event', new_event_path %>
+<% end %>
 
 <div id="calendar"></div>
