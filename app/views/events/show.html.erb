@@ -56,7 +56,7 @@
 </p>
 
 <% if signed_in? %>
-<%= link_to 'Join', event_user_path(event), data: { confirm: 'You sure going?' } %>
+<%= link_to 'Join', event_user_path(@event), data: { confirm: 'You sure going?' } %>
 <% else %>
   <p>Please sign in to attend event <%= link_to t(".sign_in"), sign_in_path %></p>
 <% end %>
