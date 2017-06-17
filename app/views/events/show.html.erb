@@ -55,6 +55,11 @@
   <%= @joined%>
 </p>
 
+          <% @event.event_photos.each do |x| %>
+            <div><%= image_tag x.image.carousel %></div>
+          <% end %>
+
+
 <% if signed_in? %>
 <%= link_to 'Join', event_user_path(@event), data: { confirm: 'You sure going?' } %>
 <% else %>
