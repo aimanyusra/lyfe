@@ -5,6 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# google calendar gem
+gem 'google-api-client', '~> 0.11', require: 'google/apis/calendar_v3'
+
 # fullcalendar gem
 gem 'momentjs-rails'
 gem 'fullcalendar-rails'
