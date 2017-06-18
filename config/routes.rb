@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
   get "/sign_up" => "users#new", as: "sign_up"
-  root "events#index"
+  root "static#index"
 
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   # get "/" => "users#new"
