@@ -20,6 +20,7 @@
   </thead>
 
   <tbody>
+  <% if @events %>
     <% @events.each do |event| %>
       <tr>
         <td><%= event.title %></td>
@@ -42,6 +43,7 @@
         <td><%= link_to 'Join', event_user_path(event), data: { confirm: 'You sure going?' } %></td>
       </tr>
     <% end %>
+  <% end %>
   </tbody>
 </table>
 

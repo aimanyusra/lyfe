@@ -10,8 +10,13 @@
 #   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 
-FACEBOOK_APP_KEY: '277261499413987' 
+FACEBOOK_APP_KEY: '277261499413987'
 FACEBOOK_APP_SECRET: 'b925eaea46855a53e4b7b99f9d968f7e'
 
-GOOGLE_CLIENT_ID: '829775661550-evn1ckl1brv8ickvad3rr2u4pb11ruu3.apps.googleusercontent.com'
-GOOGLE_CLIENT_SECRET: 'HRbiS8wAgQUAi7UWQD16FlZv'
+# original google keys
+# GOOGLE_CLIENT_ID: '829775661550-evn1ckl1brv8ickvad3rr2u4pb11ruu3.apps.googleusercontent.com'
+# GOOGLE_CLIENT_SECRET: 'HRbiS8wAgQUAi7UWQD16FlZv'
+
+# jk's integration testing keys stored in secrets.yml
+# GOOGLE_CLIENT_ID: '31207434296-0v2cu3vgher5va16s23mil1dul4f8f4f.apps.googleusercontent.com'
+# GOOGLE_CLIENT_SECRET: 'liFNWmaHV_OaINzVegSin3cm'
