@@ -1,4 +1,4 @@
-<h1><%= @user.first_name + ' ' + @user.last_name %></h1>
+<h1><%= image_tag @user.avatar.thumb, class:"img-circle" %> <%= @user.first_name + ' ' + @user.last_name %></h1>
 <br>
 
 <% if current_user %>

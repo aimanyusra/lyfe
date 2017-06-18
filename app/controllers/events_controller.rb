@@ -35,6 +35,9 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @joined = EventUser.where(event_id:params[:id]).count
+
+    @event = Event.find(params[:id])
+    @event_photos = @event.event_photos.all
   end
 
   # GET /events/new
@@ -57,6 +60,9 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        params[:event]['images'].each do |a|
+          @event_photo = @event.event_photos.create!(:image => a, :event_id => @event.id)
+        end
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -101,6 +107,11 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :status, :description, :start_date, :end_date, :location, :time, :age_limit, :price, :host_id, :tags)
+      params.require(:event).permit(:title, :status, :description, :start_date, :end_date, :location, :time, :age_limit, :price, :host_id, :tags, event_photos_attributes: [:id, :event_id, :image])
+    end
+
+    def store_photos
+        photos = params[:event][:images]
+        photos.each{|photo| @event.event_photos.create(image: photo)} if photos
     end
 end

@@ -40,9 +40,16 @@ gem 'jbuilder', '~> 2.5'
 
 # figaro gem to hide application.yml
 gem 'figaro'
+# gem to allow external login
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2', :git => 'https://github.com/zquestz/omniauth-google-oauth2', :branch => 'master'
+# photo upload manager
+gem 'carrierwave', '~> 1.0'
+# AWS S3 image hosting
+gem "fog"
+# image resizing
+gem "mini_magick"
 
 
 group :development, :test do

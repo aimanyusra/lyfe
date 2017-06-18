@@ -61,6 +61,11 @@
     <%= f.text_field :tags %>
   </div>
 
+  <div class="field">
+    <%= f.label :images %>
+    <%= f.file_field :images, :multiple => true %>
+  </div>
+
   <%= f.hidden_field :host_id, :value => current_user.id %>
   <%= hidden_field_tag 'host', current_user.id  %>
 
