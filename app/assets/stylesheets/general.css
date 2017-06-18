@@ -156,7 +156,9 @@ filter: alpha(opacity=95) !important;
 	margin:-100px 0 0 -100px; /* is width and height divided by two */
 }
 
-
+#home {
+	margin: auto;
+}
 /* Button */ 
 .mybutton_standard {
 	border: 1px solid #fff;

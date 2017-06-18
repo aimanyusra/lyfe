@@ -42,8 +42,6 @@
           <ul class="nav navbar-nav">         
             <li class="menuItem"><a href="#acts">Acts</a></li>
             <li class="menuItem"><a href="#styles">Styles</a></li>
-            <li class="menuItem"><a href="#screen">Screenshot</a></li>
-            <li class="menuItem"><a href="#credits">Credits</a></li>
             <% if signed_in? -%>
               <li class="menuItem"><%= link_to current_user.first_name, user_path(current_user.id) %></li>
               <li class="menuItem"><%= link_to "Log Out", sign_out_path, method: :delete %></li>
@@ -56,26 +54,23 @@
     </nav> 
   <% end %>
 
-  <%# if signed_in? %>
-    <%#= link_to 'edit', edit_user_path(current_user) %>
-  <%# end %>
   <br>
     <%= link_to 'home', root_path %>
     <%= link_to 'events', events_path %>
 
 
     <%= yield %>
-      <script type="text/javascript">
-    jQuery(function($) {
-    $(document).ready( function() {
-      $('.navbar-default').stickUp();
-    });
+    <script type="text/javascript">
+      jQuery(function($) {
+      $(document).ready( function() {
+        $('.navbar-default').stickUp();
+      });
     });
   
-  </script>
-  <!-- Smoothscroll -->
-  <script>
-   new WOW().init();
-  </script>
+    </script>
+    <!-- Smoothscroll -->
+    <script>
+      new WOW().init();
+    </script>
   </body>
 </html>
