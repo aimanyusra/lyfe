@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616073409) do
+ActiveRecord::Schema.define(version: 20170617063445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(version: 20170616073409) do
     t.string   "tags",        default: [],              array: true
   end
 
+  create_table "styles", force: :cascade do |t|
+    t.string   "name"
+    t.string   "tags",       default: [],              array: true
+    t.integer  "user_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["user_id"], name: "index_styles_on_user_id", using: :btree
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string   "desc"
     t.datetime "created_at", null: false
@@ -83,4 +92,5 @@ ActiveRecord::Schema.define(version: 20170616073409) do
   add_foreign_key "event_tags", "tags"
   add_foreign_key "event_users", "events"
   add_foreign_key "event_users", "users"
+  add_foreign_key "styles", "users"
 end

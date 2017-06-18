@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :styles
   resources :event_users, only: [:show, :destroy]
   resources :events
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
