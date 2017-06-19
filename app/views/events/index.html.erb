@@ -97,4 +97,6 @@
   <%= link_to 'New Event', new_event_path %>
 <% end %>
 
+<%= button_to 'Google Calendar Authorization', redirect_path, method: :get %>
+
 <div id="calendar"></div>

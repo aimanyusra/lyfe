@@ -1,0 +1,5 @@
+<ul>
+  <% @calendar_list.items.each do |calendar| %>
+    <li><%= calendar.description %> (<%= calendar.id %>) <%= link_to "Show event", gevents_path(calendar.id) %></li>
+  <% end %>
+</ul>

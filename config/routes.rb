@@ -10,6 +10,14 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
   end
 
+  # google calendar authorization
+  get '/redirect', to: 'users#redirect', as: 'redirect'
+  get '/callback', to: 'users#callback', as: 'callback'
+  get '/calendars', to: 'users#calendars', as: 'calendars'
+  get '/gevents/:calendar_id', to: 'users#gevents', as: 'gevents', calendar_id: /[^\/]+/
+
+
+
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
   get "/sign_up" => "users#new", as: "sign_up"
