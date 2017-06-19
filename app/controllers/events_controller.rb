@@ -14,16 +14,17 @@ class EventsController < ApplicationController
       @events = []
       @joined_event_id = []
       @joined.each do |y|
-          @joined_event_id << y.event_id
-        end
+        @joined_event_id << y.event_id
+      end
       Event.all.each do |x|
         if @joined_event_id.include? x.id
           # do nothing
         else
-
           @events << x
         end
       end
+    else
+      @events = Event.all
     end
       respond_to do |format|
       format.json
@@ -38,6 +39,16 @@ class EventsController < ApplicationController
 
     @event = Event.find(params[:id])
     @event_photos = @event.event_photos.all
+
+    @styles = []
+    @event_tags = EventTag.where(event_id: @event.id)
+    @event_tags.each do |x|
+      temp = StyleTag.where(tag_id: x.tag_id)
+      temp.each do |y|
+        @styles << Style.find(y.style_id)
+      end
+    end
+
   end
 
   # GET /events/new
@@ -52,17 +63,26 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+  
     @event = Event.new(event_params)
-    @event.tags << event_params['tags']
-    @tag = Tag.create(desc: event_params['tags'])
-    EventTag.create(event_id: @event.id, tag_id: @tag.id)
+    tag_array = event_params2['tags'].split(',')
+    tag_array.each do |x|
+      if Tag.find_by(desc: x)
+        @tag = Tag.find_by(desc: x)
+      else
+        @tag = Tag.create(desc: x)
+      end
+      @event.tags << @tag
+     EventTag.create(event_id: @event.id, tag_id: @tag.id)
+    end
 
 
     respond_to do |format|
       if @event.save
-        params[:event]['images'].each do |a|
-          @event_photo = @event.event_photos.create!(:image => a, :event_id => @event.id)
-        end
+        #waiting for aiman
+        # params[:event]['images'].each do |a|
+        #   @event_photo = @event.event_photos.create!(:image => a, :event_id => @event.id)
+        # end
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -78,6 +98,17 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    tag_array = event_params2['tags'].split(',')
+    tag_array.each do |x|
+      if Tag.find_by(desc: x)
+        @tag = Tag.find_by(desc: x)
+      else
+        @tag = Tag.create(desc: x)
+      end
+      @event.tags << @tag
+     EventTag.create(event_id: @event.id, tag_id: @tag.id)
+    end
+
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
@@ -107,7 +138,11 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :status, :description, :start_date, :end_date, :location, :time, :age_limit, :price, :host_id, :tags, event_photos_attributes: [:id, :event_id, :image])
+      params.require(:event).permit(:title, :status, :description, :start_date, :end_date, :location, :time, :age_limit, :price, :host_id, event_photos_attributes: [:id, :event_id, :image])
+    end
+
+    def event_params2
+      params.require(:event).permit(:tags)
     end
 
     def store_photos

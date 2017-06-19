@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :styles
-  resources :event_users, only: [:show, :destroy]
+  resources :event_users, only: [:show, :destroy, :edit, :update]
   resources :events
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]

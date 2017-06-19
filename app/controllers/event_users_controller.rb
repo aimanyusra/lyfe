@@ -12,4 +12,14 @@ class EventUsersController < ApplicationController
 		@attendence[0].destroy
 		redirect_to events_path
 	end
+
+	def edit
+		# just using this for making favorites
+		byebug
+	end
+
+	def update
+		Favorite.create(user_id: current_user.id, object: 'event', objectid: params[:id])
+		redirect_to events_path
+	end
 end

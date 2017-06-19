@@ -7,7 +7,9 @@
 
 <p>
   <strong>Tags:</strong>
-  <%= @style.tags %>
+  <% @style.tags.each do |x| %>
+  <%= x.desc %>
+  <% end %>
 </p>
 
 <p>

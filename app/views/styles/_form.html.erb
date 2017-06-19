@@ -18,13 +18,11 @@
 
   <div class="field">
     <%= f.label :tags %>
-    <%= f.text_field :tags %>
+    <%= f.text_field :tags, :value => ''  %>
   </div>
 
-  <div class="field">
-    <%= f.label :user_id %>
-    <%= f.text_field :user_id %>
-  </div>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <%= hidden_field_tag 'host', current_user.id  %>
 
   <div class="actions">
     <%= f.submit %>

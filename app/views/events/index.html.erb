@@ -32,15 +32,28 @@
         <td><%= event.time %></td>
         <td><%= event.age_limit %></td>
         <td><%= event.price %></td>
-        <td><%= event.tags %></td>
+        <td><% event.tags.each do |x| %>
+            <%= x.desc %>
+            <% end %></td>
         <td><%= link_to 'Show', event %></td>
+
         <% if current_user %>
           <%if current_user.id == event.host_id %>
             <td><%= link_to 'Edit', edit_event_path(event) %></td>
             <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <%end%>
+        
+          <td><%= link_to 'Join', event_user_path(event), data: { confirm: 'You sure going?' } %></td>
+
+          <% @favorites = Favorite.where(object: 'event')%>
+          <% @favorites = @favorites.where(objectid: event.id)%>
+          <% if !@favorites.where(user_id: current_user.id).any? %>
+          
+            <td><%= link_to 'Mark as favorite', event_user_path(event), method: :patch %></td>
+          <% else %>
+            <td>Already favorited</td>
+          <% end %>
         <% end %>
-        <td><%= link_to 'Join', event_user_path(event), data: { confirm: 'You sure going?' } %></td>
       </tr>
     <% end %>
    <% end %>
@@ -48,7 +61,7 @@
 </table>
 
 <br>
-<%end%>
+<!-- just removed an end from this line -->
 
 <h1>Joined Events</h1>
 
@@ -96,6 +109,10 @@
 
 <% if current_user %>
   <%= link_to 'New Event', new_event_path %>
+  <br>
+  <%= link_to 'New Style', new_style_path %>
 <% end %>
+<br>
+<br>
 
 <div id="calendar"></div>

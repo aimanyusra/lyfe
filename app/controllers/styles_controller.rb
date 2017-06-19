@@ -24,7 +24,19 @@ class StylesController < ApplicationController
   # POST /styles
   # POST /styles.json
   def create
-    @style = Style.new(style_params)
+    @style = Style.new()
+    @style.name = style_params['name']
+    @style.user_id = current_user.id
+    tag_array = style_params['tags'].split(',')
+    tag_array.each do |x|     
+      if Tag.find_by(desc: x)
+        @tag = Tag.find_by(desc: x)
+      else
+        @tag = Tag.create(desc: x)
+      end
+       @style.tags << @tag
+      StyleTag.create(style_id: @style.id, tag_id: @tag.id)
+    end
 
     respond_to do |format|
       if @style.save
