@@ -53,10 +53,13 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-    @event.tags << event_params['tags']
-    @tag = Tag.create(desc: event_params['tags'])
-    EventTag.create(event_id: @event.id, tag_id: @tag.id)
 
+    tag_array = event_params['tags'].split(',')
+    tag_array.each do |x|
+      @event.tags << x
+      @tag = Tag.create(desc: x)
+      EventTag.create(event_id: @event.id, tag_id: @tag.id)
+    end
 
     respond_to do |format|
       if @event.save

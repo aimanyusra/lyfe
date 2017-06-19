@@ -12,6 +12,7 @@ body, html {
 	height: 100%;
 	width: 100%;
 	overflow-x:hidden;
+	margin: auto;
 }
 
 ::-moz-selection{background:#1abc9c;color:white}
@@ -159,6 +160,7 @@ filter: alpha(opacity=95) !important;
 #home {
 	margin: auto;
 }
+
 /* Button */ 
 .mybutton_standard {
 	border: 1px solid #fff;
