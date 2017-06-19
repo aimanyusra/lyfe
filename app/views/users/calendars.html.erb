@@ -1,0 +1,7 @@
+<!-- <ul>
+  <% @calendar_list.items.each do |calendar| %>
+    <li><%= calendar.description %> (<%= calendar.id %>) <%= link_to "Show event", gevents_path(calendar.id) %></li>
+  <% end %>
+</ul> -->
+
+<iframe src="https://calendar.google.com/calendar/embed?src=<%=current_user.email%>&ctz=Asia/Kuala_Lumpur" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
