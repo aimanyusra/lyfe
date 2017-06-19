@@ -67,9 +67,7 @@ class UsersController < Clearance::UsersController
 		})
 
 		response = client.fetch_access_token!
-
 		session[:authorization] = response
-
 		redirect_to calendars_url
 	end
 
