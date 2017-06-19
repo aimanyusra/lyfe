@@ -1,0 +1,68 @@
+<body id="home">
+
+	<!-- Preloader -->
+<!-- 	<div id="preloader">
+		<div id="status"></div>
+	</div> -->
+	
+	<!-- FullScreen -->
+    <div class="intro-header">
+			<div class="col-xs-12 text-center abcen1">
+				<h1><span class="wow fadeIn" data-wow-delay="4.0s">L</span><span class="wow fadeIn" data-wow-delay="4.5s">y</span><span class="wow fadeIn" data-wow-delay="5.0s">f</span><span class="wow fadeIn" data-wow-delay="5.5s">e</span></h1>
+				<h3 class="h3_home wow fadeIn" data-wow-delay="0.6s"><strong class="wow fadeIn" data-wow-delay="4.0s">L</strong>ifest<strong class="wow fadeIn" data-wow-delay="4.5s">y</strong>le <span class="dot"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span> <strong class="wow fadeIn" data-wow-delay="5.0s">F</strong>ashion <span class="dot"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span> <strong class="wow fadeIn" data-wow-delay="5.5s">E</strong>vents</h3>
+
+<!-- 		<ul class="list-inline intro-social-buttons">
+					<li><a href="https://twitter.com/galantiandrea" class="btn  btn-lg mybutton_cyano wow fadeIn" data-wow-delay="0.8s"><span class="network-name">Twitter</span></a>
+					</li>
+					<li id="download" ><a href="#downloadlink" class="btn  btn-lg mybutton_standard wow swing wow fadeIn" data-wow-delay="1.2s"><span class="network-name">Free Download</span></a>
+					</li>
+				</ul> -->
+				<br>
+				<div class="col-lg-6 col-md-offset-3">
+			    <div class="input-group">
+			      <input type="text" class="form-control" placeholder="Search for... Acts, Styles">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default" type="button">Go!</button>
+			      </span>
+			    </div><!-- /input-group -->
+			  </div><!-- /.col-lg-6 -->
+			</div> 
+
+
+
+	    <!-- /.container -->
+			<div class="col-xs-12 text-center abcen wow fadeIn">
+				<div class="button_down "> 
+					<a class="imgcircle wow bounceInUp" data-wow-duration="1.5s"  href="#acts"> <img class="img_scroll" src="icon/circle.png" alt=""> </a>
+				</div>
+			</div>
+    </div>
+
+          <!-- NavBar-->
+    <nav class="navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+  <!--        <button type="button" class="navbar-toggle fa fa-bars" aria-hidden="true"" data-toggle="collapse" data-target=".navbar-ex1-collapse"> -->
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#home">Lyfe</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+          <ul class="nav navbar-nav">         
+            <li class="menuItem"><a href="#acts">Acts</a></li>
+            <li class="menuItem"><a href="#styles">Styles</a></li>
+            <% if signed_in? -%>
+              <li class="menuItem"><%= link_to current_user.first_name, user_path(current_user.id) %></li>
+              <li class="menuItem"><%= link_to "Log Out", sign_out_path, method: :delete %></li>
+            <% else -%>
+              <li class="menuItem"><%= link_to "Log In", sign_in_path %></li>
+            <% end %>
+          </ul>
+        </div>     
+      </div>
+    </nav> 
+</body>

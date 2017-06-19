@@ -53,6 +53,8 @@ gem 'carrierwave', '~> 1.0'
 gem "fog"
 # image resizing
 gem "mini_magick"
+# font awesome for icons
+gem "font-awesome-rails"
 
 
 group :development, :test do
