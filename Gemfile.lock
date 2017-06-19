@@ -411,6 +411,10 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   mini_magick
+  fullcalendar-rails
+  jbuilder (~> 2.5)
+  jquery-rails
+  listen (~> 3.0.5)
   momentjs-rails
   omniauth
   omniauth-facebook
