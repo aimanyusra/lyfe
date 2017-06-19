@@ -20,15 +20,15 @@ class EventsController < ApplicationController
         if @joined_event_id.include? x.id
           # do nothing
         else
+
           @events << x
         end
       end
+    end
       respond_to do |format|
-      format.json 
+      format.json
       format.html
     end
-  end
-
   end
 
   # GET /events/1
