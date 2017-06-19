@@ -98,5 +98,9 @@
 <% end %>
 
 <%= button_to 'Google Calendar Authorization', redirect_path, method: :get %>
+<%= form_tag new_gevent_url(:calendar_id) do %>
+  <%= submit_tag 'Add Google event' %>
+<% end %>
+
 
 <div id="calendar"></div>

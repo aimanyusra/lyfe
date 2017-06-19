@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get '/callback', to: 'users#callback', as: 'callback'
   get '/calendars', to: 'users#calendars', as: 'calendars'
   get '/gevents/:calendar_id', to: 'users#gevents', as: 'gevents', calendar_id: /[^\/]+/
+  post '/gevents/:calendar_id', to: 'users#new_gevent', as: 'new_gevent', calendar_id: /[^\/]+/
+
 
 
 
