@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619064454) do
+ActiveRecord::Schema.define(version: 20170620063935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20170619064454) do
     t.string   "status"
     t.string   "tags",        default: [],              array: true
     t.string   "images",      default: [],              array: true
+    t.string   "state"
   end
 
   create_table "favorites", force: :cascade do |t|
