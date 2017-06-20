@@ -65,36 +65,12 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-   tag_array = event_params['tags'].split(',')
-   tag_array.each do |x|
-     @event.tags << x
-     @tag = Tag.create(desc: x)
-     EventTag.create(event_id: @event.id, tag_id: @tag.id)
-   end
-
-   # add event to google calendar
-   client = Signet::OAuth2::Client.new({
-     client_id: ENV["GOOGLE_CLIENT_ID"],
-     client_secret: ENV["GOOGLE_CLIENT_SECRET"],
-     token_credential_uri: 'https://accounts.google.com/o/oauth2/token'
-   })
-
-   client.update!(session[:authorization])
-
-   service = Google::Apis::CalendarV3::CalendarService.new
-   service.authorization = client
-
-   today = Date.today
-
-   event = Google::Apis::CalendarV3::Event.new({
-     start: Google::Apis::CalendarV3::EventDateTime.new(date: today),
-     end: Google::Apis::CalendarV3::EventDateTime.new(date: today + 1),
-     summary: 'Final Lyfe act!'
-   })
-
-   service.insert_event(current_user.email, event)
-
-   redirect_to events_url(calendar_id: current_user.email)
+    tag_array = event_params2['tags'].split(',')
+    tag_array.each do |x|
+      @tag = Tag.create(desc: x)
+      @event.tags << @tag
+    end
+    EventTag.create(event_id: @event.id, tag_id: @tag.id)
 
    respond_to do |format|
      if @event.save
@@ -121,8 +97,10 @@ class EventsController < ApplicationController
         @tag = Tag.create(desc: x)
       end
       @event.tags << @tag
-     EventTag.create(event_id: @event.id, tag_id: @tag.id)
+      byebug
+      EventTag.create(event_id: @event.id, tag_id: @tag.id)
     end
+
 
     respond_to do |format|
       store_photos
@@ -154,7 +132,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :status, :description, :start_date, :end_date, :location, :time, :age_limit, :price, :host_id, :tags, :state, :country, event_photos_attributes: [:id, :event_id, :image])
+      params.require(:event).permit(:title, :status, :description, :start_date, :end_date, :location, :time, :age_limit, :price, :host_id, :state, event_photos_attributes: [:id, :event_id, :image])
     end
 
     def event_params2

@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :events, through: :event_users, dependent: :destroy
 
   has_many :authentications, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
 
   def self.create_with_auth_and_hash(authentication, auth_hash)
