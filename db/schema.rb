@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620063935) do
+ActiveRecord::Schema.define(version: 20170619064454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,8 +62,9 @@ ActiveRecord::Schema.define(version: 20170620063935) do
     t.datetime "updated_at",               null: false
     t.string   "status"
     t.string   "tags",        default: [],              array: true
-    t.string   "images",      default: [],              array: true
     t.string   "state"
+    t.string   "country"
+    t.string   "images",      default: [],              array: true
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -73,6 +74,14 @@ ActiveRecord::Schema.define(version: 20170620063935) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_favorites_on_user_id", using: :btree
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.string   "keyword"
+    t.string   "state"
+    t.string   "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "style_tags", force: :cascade do |t|
