@@ -15,7 +15,6 @@ class EventUsersController < ApplicationController
 
 	def edit
 		# just using this for making favorites
-		byebug
 	end
 
 	def update
