@@ -2,7 +2,9 @@
 
 <h3>You may know</h3>
 <% User.all.each do |x| %>
- <% p x.first_name %>
+ <%= p x.first_name %>
+ <td><%= link_to 'Send friend request', friend_path(x) %></td>
+ <br>
 <%end%>
 
 <h1>Un-Joined Events</h1>
