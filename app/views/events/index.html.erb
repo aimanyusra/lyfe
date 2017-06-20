@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+
 <div class="container">
         <div class="row">
           <% @events.each do |event| %>
@@ -12,15 +13,17 @@
                         </figure>
                         <h4 class="card-title mt-3"><%= event.title %></h4>
                         <div class="meta">
-                            <a>Friends</a>
+                            <a><%= event.start_date.strftime("%d-%m-%Y") %></a>
+                            <a><%= event.time %></a>
                         </div>
                         <div class="card-text">
                         <%= event.description %>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <small>Last updated 3 mins ago</small>
-                        <button class="btn btn-secondary float-right btn-sm">show</button>
+                        <button class="btn btn-secondary float-right btn-sm"><%= link_to event do %>SHOW<% end %></button>
+                        <button class="btn btn-secondary float-right btn-sm"><%= link_to event_user_path(event), data: { confirm: 'You sure going?' } do %>JOIN<% end %></button>
+
                     </div>
                 </div>
             </div>
@@ -110,7 +113,7 @@
         <td><%= event.title %></td>
         <td><%= event.status %></td>
         <td><%= event.description %></td>
-        <td><%= event.start_date %></td>
+        <td><%= event.start_date.strftime("%d-%m-%Y") %></td>
         <td><%= event.end_date %></td>
         <td><%= event.location %></td>
         <td><%= event.time %></td>

@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   get "/sign_up" => "users#new", as: "sign_up"
   root "static#index"
 
+
+
+
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   # get "/" => "users#new"
   # root "users#new"
