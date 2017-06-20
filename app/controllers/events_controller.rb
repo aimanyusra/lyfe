@@ -62,6 +62,30 @@ class EventsController < ApplicationController
      EventTag.create(event_id: @event.id, tag_id: @tag.id)
    end
 
+   # add event to google calendar
+   client = Signet::OAuth2::Client.new({
+     client_id: ENV["GOOGLE_CLIENT_ID"],
+     client_secret: ENV["GOOGLE_CLIENT_SECRET"],
+     token_credential_uri: 'https://accounts.google.com/o/oauth2/token'
+   })
+
+   client.update!(session[:authorization])
+
+   service = Google::Apis::CalendarV3::CalendarService.new
+   service.authorization = client
+
+   today = Date.today
+
+   event = Google::Apis::CalendarV3::Event.new({
+     start: Google::Apis::CalendarV3::EventDateTime.new(date: today),
+     end: Google::Apis::CalendarV3::EventDateTime.new(date: today + 1),
+     summary: 'Final Lyfe act!'
+   })
+
+   service.insert_event(current_user.email, event)
+
+   redirect_to events_url(calendar_id: current_user.email)
+
    respond_to do |format|
      if @event.save
        params[:event]['images'].each do |a|
