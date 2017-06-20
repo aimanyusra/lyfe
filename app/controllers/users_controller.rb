@@ -105,7 +105,7 @@ class UsersController < Clearance::UsersController
 
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = client
-
+    byebug
     @event_list = service.list_events(params[:calendar_id])
   end
 
@@ -132,6 +132,9 @@ class UsersController < Clearance::UsersController
     service.insert_event(current_user.email, event)
 
     redirect_to events_url(calendar_id: current_user.email)
+    # service.insert_event(params[:calendar_id], event)
+
+   	# redirect_to events_url(calendar_id: params[:calendar_id])
   end
 
 
