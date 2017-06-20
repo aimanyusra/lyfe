@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get '/calendars', to: 'users#calendars', as: 'calendars'
   get '/gevents/:calendar_id', to: 'users#gevents', as: 'gevents', calendar_id: /[^\/]+/
   post '/gevents/:calendar_id', to: 'users#new_gevent', as: 'new_gevent', calendar_id: /[^\/]+/
+  get '/freebusy/:calendar_id', to: 'users#freebusy', as: 'freebusy', calendar_id: /[^\/]+/
+
 
 
 
@@ -26,6 +28,9 @@ Rails.application.routes.draw do
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
   get "/sign_up" => "users#new", as: "sign_up"
   root "static#index"
+
+
+
 
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   # get "/" => "users#new"

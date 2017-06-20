@@ -86,7 +86,7 @@ class UsersController < Clearance::UsersController
 
     begin
       @calendar_list = service.list_calendar_lists
-    rescue Google::Apis::AuthorizationError => exception
+    	rescue Google::Apis::AuthorizationError => exception
       response = client.refresh!
 
       session[:authorization] = session[:authorization].merge(response)
@@ -106,7 +106,7 @@ class UsersController < Clearance::UsersController
 
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = client
-
+    byebug
     @event_list = service.list_events(params[:calendar_id])
   end
 
@@ -127,7 +127,7 @@ class UsersController < Clearance::UsersController
     event = Google::Apis::CalendarV3::Event.new({
       start: Google::Apis::CalendarV3::EventDateTime.new(date: today),
       end: Google::Apis::CalendarV3::EventDateTime.new(date: today + 1),
-      summary: 'New Lyfe act!'
+      summary: 'Almost there'
     })
 
     service.insert_event(current_user.email, event)
@@ -135,7 +135,17 @@ class UsersController < Clearance::UsersController
     redirect_to events_url(calendar_id: current_user.email)
   end
 
-
+	# freebusy checker
+	def freebusy
+	  client = init_client
+	  service = client.discovered_api('calendar', 'v3')
+	  @result = client.execute(
+	    :api_method => service.freebusy.query,
+	    :body_object => { :timeMin => start_time, #example: DateTime.now - 1.month
+	                      :timeMax => end_time, #example: DateTime.now + 1.month
+	                      :items => items
+	                    })
+	end
 
 	private
 	def user_params

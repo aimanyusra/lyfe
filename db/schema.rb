@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20170620010532) do
+=======
+ActiveRecord::Schema.define(version: 20170620090409) do
+>>>>>>> 72c920908e189a0c68a58da211c5ef3a88f1f943
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +58,6 @@ ActiveRecord::Schema.define(version: 20170620010532) do
     t.date     "start_date"
     t.date     "end_date"
     t.string   "location"
-    t.string   "time"
     t.integer  "age_limit"
     t.integer  "price"
     t.integer  "host_id"
@@ -62,7 +65,11 @@ ActiveRecord::Schema.define(version: 20170620010532) do
     t.datetime "updated_at",               null: false
     t.string   "status"
     t.string   "tags",        default: [],              array: true
+    t.string   "state"
+    t.string   "country"
     t.string   "images",      default: [],              array: true
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -74,10 +81,17 @@ ActiveRecord::Schema.define(version: 20170620010532) do
     t.index ["user_id"], name: "index_favorites_on_user_id", using: :btree
   end
 
+<<<<<<< HEAD
   create_table "friends", force: :cascade do |t|
     t.integer  "firstid"
     t.integer  "secondid"
     t.integer  "status"
+=======
+  create_table "searches", force: :cascade do |t|
+    t.string   "keyword"
+    t.string   "state"
+    t.string   "country"
+>>>>>>> 72c920908e189a0c68a58da211c5ef3a88f1f943
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

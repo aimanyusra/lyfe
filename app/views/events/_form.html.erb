@@ -42,8 +42,13 @@
   </div>
 
   <div class="field">
-    <%= f.label :time %>
-    <%= f.text_field :time %>
+    <%= f.label :start_time %>
+    <%= f.datetime_field :start_time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_time %>
+    <%= f.datetime_field :end_time %>
   </div>
 
   <div class="field">
@@ -59,6 +64,11 @@
   <div class="field">
     <%= f.label :tags %>
     <%= f.text_field :tags, :value => '' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :state %>
+    <%= f.text_field :state %>
   </div>
 
   <div class="field">
