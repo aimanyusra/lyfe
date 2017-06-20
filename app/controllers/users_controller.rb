@@ -106,7 +106,7 @@ class UsersController < Clearance::UsersController
 
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = client
-    byebug
+
     @event_list = service.list_events(params[:calendar_id])
   end
 
@@ -137,6 +137,12 @@ class UsersController < Clearance::UsersController
 
 	# freebusy checker
 	def freebusy
+		@client.execute(api_method: @service.freebusy.query,
+  body: JSON.dump({timeMin: start_time,
+  timeMax: end_time,
+  timeZone: "EST",
+  items: [calendar_id]}),
+  headers: {'Content-Type' => 'application/json'})
 	  client = init_client
 	  service = client.discovered_api('calendar', 'v3')
 	  @result = client.execute(
