@@ -61,9 +61,8 @@ ActiveRecord::Schema.define(version: 20170620090409) do
     t.datetime "updated_at",               null: false
     t.string   "status"
     t.string   "tags",        default: [],              array: true
-    t.string   "state"
-    t.string   "country"
     t.string   "images",      default: [],              array: true
+    t.string   "state"
     t.datetime "start_time"
     t.datetime "end_time"
   end
@@ -75,14 +74,6 @@ ActiveRecord::Schema.define(version: 20170620090409) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_favorites_on_user_id", using: :btree
-  end
-
-  create_table "searches", force: :cascade do |t|
-    t.string   "keyword"
-    t.string   "state"
-    t.string   "country"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "style_tags", force: :cascade do |t|
