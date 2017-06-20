@@ -109,7 +109,6 @@ class UsersController < Clearance::UsersController
     @event_list = service.list_events(params[:calendar_id])
   end
 
-	#  contents of new_gevent method is implemented within events_controller when creating a new event
 	def new_gevent
     client = Signet::OAuth2::Client.new({
 			client_id: ENV["GOOGLE_CLIENT_ID"],
@@ -135,7 +134,17 @@ class UsersController < Clearance::UsersController
     redirect_to events_url(calendar_id: current_user.email)
   end
 
-
+	# freebusy checker
+	def freebusy
+	  client = init_client
+	  service = client.discovered_api('calendar', 'v3')
+	  @result = client.execute(
+	    :api_method => service.freebusy.query,
+	    :body_object => { :timeMin => start_time, #example: DateTime.now - 1.month
+	                      :timeMax => end_time, #example: DateTime.now + 1.month
+	                      :items => items
+	                    })
+	end
 
 	private
 	def user_params
