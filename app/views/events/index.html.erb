@@ -50,7 +50,8 @@
       <th>Start date</th>
       <th>End date</th>
       <th>Location</th>
-      <th>Time</th>
+      <th>Start Time</th>
+      <th>End Time</th>
       <th>Age limit</th>
       <th>Price</th>
       <th>Tags</th>
@@ -69,7 +70,8 @@
         <td><%= event.start_date %></td>
         <td><%= event.end_date %></td>
         <td><%= event.location %></td>
-        <td><%= event.time %></td>
+        <td><%= event.start_time %></td>
+        <td><%= event.end_time %></td>
         <td><%= event.age_limit %></td>
         <td><%= event.price %></td>
         <td><% event.tags.each do |x| %>
@@ -116,7 +118,8 @@
       <th>Start date</th>
       <th>End date</th>
       <th>Location</th>
-      <th>Time</th>
+      <th>Start Time</th>
+      <th>End Time</th>
       <th>Age limit</th>
       <th>Price</th>
       <th>State</th>
@@ -134,7 +137,8 @@
         <td><%= event.start_date.strftime("%d-%m-%Y") %></td>
         <td><%= event.end_date %></td>
         <td><%= event.location %></td>
-        <td><%= event.time %></td>
+        <td><%= event.start_time %></td>
+        <td><%= event.end_time %></td>
         <td><%= event.age_limit %></td>
         <td><%= event.price %></td>
         <td><%= event.state %></td>

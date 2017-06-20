@@ -109,33 +109,42 @@ class UsersController < Clearance::UsersController
     @event_list = service.list_events(params[:calendar_id])
   end
 
-	#  contents of new_gevent method is implemented within events_controller when creating a new event
 	def new_gevent
-    # client = Signet::OAuth2::Client.new({
-		# 	client_id: ENV["GOOGLE_CLIENT_ID"],
-    #   client_secret: ENV["GOOGLE_CLIENT_SECRET"],
-    #   token_credential_uri: 'https://accounts.google.com/o/oauth2/token'
-    # })
-		#
-    # client.update!(session[:authorization])
-		#
-    # service = Google::Apis::CalendarV3::CalendarService.new
-    # service.authorization = client
-		#
-    # today = Date.today
-		#
-    # event = Google::Apis::CalendarV3::Event.new({
-    #   start: Google::Apis::CalendarV3::EventDateTime.new(date: today),
-    #   end: Google::Apis::CalendarV3::EventDateTime.new(date: today + 1),
-    #   summary: 'New Lyfe act!'
-    # })
-		#
-    # service.insert_event(current_user.email, event)
-		#
-    # redirect_to events_url(calendar_id: current_user.email)
+    client = Signet::OAuth2::Client.new({
+			client_id: ENV["GOOGLE_CLIENT_ID"],
+      client_secret: ENV["GOOGLE_CLIENT_SECRET"],
+      token_credential_uri: 'https://accounts.google.com/o/oauth2/token'
+    })
+
+    client.update!(session[:authorization])
+
+    service = Google::Apis::CalendarV3::CalendarService.new
+    service.authorization = client
+
+    today = Date.today
+
+    event = Google::Apis::CalendarV3::Event.new({
+      start: Google::Apis::CalendarV3::EventDateTime.new(date: today),
+      end: Google::Apis::CalendarV3::EventDateTime.new(date: today + 1),
+      summary: 'Almost there'
+    })
+
+    service.insert_event(current_user.email, event)
+
+    redirect_to events_url(calendar_id: current_user.email)
   end
 
-
+	# freebusy checker
+	def freebusy
+	  client = init_client
+	  service = client.discovered_api('calendar', 'v3')
+	  @result = client.execute(
+	    :api_method => service.freebusy.query,
+	    :body_object => { :timeMin => start_time, #example: DateTime.now - 1.month
+	                      :timeMax => end_time, #example: DateTime.now + 1.month
+	                      :items => items
+	                    })
+	end
 
 	private
 	def user_params
