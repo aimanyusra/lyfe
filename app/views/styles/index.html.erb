@@ -16,11 +16,24 @@
     <% @styles.each do |style| %>
       <tr>
         <td><%= style.name %></td>
-        <td><%= style.tags %></td>
-        <td><%= style.user %></td>
+        <% if style.tags.any? %>
+          <td><%= style.tags.first.desc %></td>
+        <%else%>
+          <td></td>
+        <%end%>
+        <td><%= style.user.first_name %></td>
         <td><%= link_to 'Show', style %></td>
         <td><%= link_to 'Edit', edit_style_path(style) %></td>
         <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+          <!-- below 2 lines can put in controller -->        
+          <% @favorites = Favorite.where(object: 'style')%>
+          <% @favorites = @favorites.where(objectid: style.id)%>
+          <% if !@favorites.where(user_id: current_user.id).any? %>          
+            <td><%= link_to 'Mark as favorite', edit_event_user_path(style) %></td>
+          <% else %>
+            <td>Already favorited</td>
+          <% end %>
       </tr>
     <% end %>
   </tbody>
