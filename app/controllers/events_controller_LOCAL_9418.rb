@@ -63,7 +63,6 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-<<<<<<< HEAD
   
     @event = Event.new(event_params)
     tag_array = event_params2['tags'].split(',')
@@ -92,30 +91,8 @@ class EventsController < ApplicationController
       end
     end
 
-=======
->>>>>>> 66be4e79cf96a77da4eb60033d0b362e60f4a055
 
-    @event = Event.new(event_params)
 
-   tag_array = event_params['tags'].split(',')
-   tag_array.each do |x|
-     @event.tags << x
-     @tag = Tag.create(desc: x)
-     EventTag.create(event_id: @event.id, tag_id: @tag.id)
-   end
-
-   respond_to do |format|
-     if @event.save
-       params[:event]['images'].each do |a|
-         @event_photo = @event.event_photos.create!(:image => a, :event_id => @event.id)
-       end
-       format.html { redirect_to @event, notice: 'Event was successfully created.' }
-       format.json { render :show, status: :created, location: @event }
-     else
-       format.html { render :new }
-       format.json { render json: @event.errors, status: :unprocessable_entity }
-     end
-   end
   end
 
   # PATCH/PUT /events/1
@@ -133,7 +110,6 @@ class EventsController < ApplicationController
     end
 
     respond_to do |format|
-      store_photos
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
