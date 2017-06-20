@@ -74,7 +74,7 @@ class EventsController < ApplicationController
         @tag = Tag.create(desc: x)
       end
       @event.tags << @tag
-     EventTag.create(event_id: @event.id, tag_id: @tag.id)
+     # EventTag.create(event_id: @event.id, tag_id: @tag.id)
     end
 
 
@@ -129,7 +129,8 @@ class EventsController < ApplicationController
         @tag = Tag.create(desc: x)
       end
       @event.tags << @tag
-     EventTag.create(event_id: @event.id, tag_id: @tag.id)
+     # EventTag.create(event_id: @event.id, tag_id: @tag.id)
+
     end
 
     respond_to do |format|
