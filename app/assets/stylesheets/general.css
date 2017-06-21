@@ -1064,6 +1064,10 @@ color: #ECEBEB;
 	border-radius: 15px;
 }
 
+#acts {
+	height: 100%;
+}
+
 /* tags for forms */
 
 .bootstrap-tagsinput {

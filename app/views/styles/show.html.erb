@@ -12,10 +12,10 @@
   <% end %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @style.user %>
-</p>
+
+          <% @style.style_photos.each do |x| %>
+            <div><%= image_tag x.image.sponsor %></div>
+          <% end %>
 
 <%= link_to 'Edit', edit_style_path(@style) %> |
 <%= link_to 'Back', styles_path %>
