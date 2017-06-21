@@ -157,11 +157,32 @@ filter: alpha(opacity=95) !important;
 	margin:-100px 0 0 -100px; /* is width and height divided by two */
 }
 
-#home {
+#home,#styles,#acts {
 	margin: auto;
 }
 
+.img-slide {
+
+}
+
+
+
 /* Button */ 
+.slick-prev:before, .slick-next:before { 
+  color:grey ;
+  font-size: 75px;
+}
+
+.slick-prev:before {
+  content: "\f104";
+  font-family: FontAwesome;
+}
+
+.slick-next:before {
+  content: "\f105";
+  font-family: FontAwesome;
+}
+
 .mybutton_standard {
 	border: 1px solid #fff;
 	color: #fff;
