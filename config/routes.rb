@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get '/gevents/:calendar_id', to: 'users#gevents', as: 'gevents', calendar_id: /[^\/]+/
   post '/gevents/:calendar_id', to: 'users#new_gevent', as: 'new_gevent', calendar_id: /[^\/]+/
   get '/freebusy/:calendar_id', to: 'users#freebusy', as: 'freebusy', calendar_id: /[^\/]+/
+  
+
 
 
 

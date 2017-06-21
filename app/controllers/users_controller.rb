@@ -136,22 +136,58 @@ class UsersController < Clearance::UsersController
   end
 
 	# freebusy checker
-	def freebusy
-		@client.execute(api_method: @service.freebusy.query,
-  body: JSON.dump({timeMin: start_time,
-  timeMax: end_time,
-  timeZone: "EST",
-  items: [calendar_id]}),
-  headers: {'Content-Type' => 'application/json'})
-	  client = init_client
-	  service = client.discovered_api('calendar', 'v3')
-	  @result = client.execute(
-	    :api_method => service.freebusy.query,
-	    :body_object => { :timeMin => start_time, #example: DateTime.now - 1.month
-	                      :timeMax => end_time, #example: DateTime.now + 1.month
-	                      :items => items
-	                    })
+	def init_client
+	  # client = Google::APIClient.new
+	  # # # Fill client with all needed data
+	  # # client.authorization.access_token = @token #token is taken from auth table
+	  # client.authorization.client_id = @oauth2_key
+	  # client.authorization.client_secret = @oauth2_secret
+	  # # client.authorization.refresh_token = @refresh_token
+		# @client.authorization.refresh!
+		# byebug
+
+		client = Signet::OAuth2::Client.new({
+			client_id: ENV["GOOGLE_CLIENT_ID"],
+			client_secret: ENV["GOOGLE_CLIENT_SECRET"],
+			token_credential_uri: 'https://accounts.google.com/o/oauth2/token'
+		})
+
+		# client = Signet::OAuth2::Client.new({
+			# client_id: ENV["GOOGLE_CLIENT_ID"],
+			# client_secret: ENV["GOOGLE_CLIENT_SECRET"],
+			# authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
+			# # token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
+			# scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
+			# redirect_uri: callback_url
+	    # })
+			# byebug
+		client.update!(session[:authorization])
+	  # return client
 	end
+
+	def freebusy
+		  client = init_client
+			body = Google::Apis::CalendarV3::FreeBusyRequest.new
+			body.items = [current_user.email]
+			body.time_min = "2017-06-01T13:00:00z"
+			body.time_max = "2017-06-29T21:00:00z"
+			service = Google::Apis::CalendarV3::CalendarService.new
+			service.authorization = client
+			service.query_freebusy(body)
+			byebug
+			redirect_to(:back)
+
+			# client.execute(
+			#   :api_method => service.query_freebusy,
+			#   :body => JSON.dump({
+			#     :timeMin => DateTime.now - 1.month,
+			#     :timeMax => DateTime.now + 1.month,
+			#     :items => [{'id' => 'jkcodetest@gmail.com'}]
+			#   }),
+			#   :headers => {'Content-Type' => 'application/json'})
+	end
+
+
 
 	private
 	def user_params
