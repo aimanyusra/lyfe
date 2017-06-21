@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Un-Joined Events</h1>
+
 <div class="container">
         <div class="row">
           <% @events.each_with_index do |event, i| %>
@@ -15,7 +16,7 @@
                         <div class="meta">
                             <a>STATE : <%= event.state %></a><br>
                             <a>DATE : <%= event.start_date.strftime("%d-%m-%Y") %></a><br>
-                            <a>TIME : <%= event.time %></a>
+                            
                         </div>
                         <div class="card-text">
                         <%= event.description %>
@@ -34,9 +35,32 @@
 
 
 
+<h3>You may know</h3>
+<% User.all.each do |x| %>
+  <% if !Friend.where(firstid: current_user.id).where(secondid: x.id).any?%>
+    <% if !Friend.where(firstid: x.id).where(secondid: current_user.id).any?%>
+     <%= p x.first_name %>
+     <%= link_to 'Send friend request', friend_path(x) %>
+     <br>
+    <%end%>
+  <%end%>
+<%end%>
 
+<h3>Friend request from</h3>
+  <% Friend.where(secondid: current_user.id).where(status: 0).each do |x|%>
+    <%= p User.find(x.firstid).first_name %>
+    <%= link_to 'Confirm friend request', edit_friend_path(x) %>
+  <%end%>
 
-
+<h3>Fyour friends</h3>
+  <% Friend.where(status: 1).each do |x|%>
+    <% if x.firstid == current_user.id %>
+      <%= p User.find(x.secondid).first_name %>
+    <%end%>
+    <% if x.secondid == current_user.id %>
+      <%= p User.find(x.firstid).first_name %>
+    <%end%>
+  <%end%>
 
 
 <h1>Un-Joined Events</h1>
@@ -88,6 +112,7 @@
         
           <td><%= link_to 'Join', event_user_path(event), data: { confirm: 'You sure going?' } %></td>
 
+          <!-- below 2 lines can put in controller -->
           <% @favorites = Favorite.where(object: 'event')%>
           <% @favorites = @favorites.where(objectid: event.id)%>
           <% if !@favorites.where(user_id: current_user.id).any? %>

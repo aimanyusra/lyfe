@@ -38,10 +38,11 @@ class UsersController < Clearance::UsersController
 
 	def show
 		@user = User.find(params[:id])
-		if current_user
-			@events = Event.where(host_id: current_user.id)
-			@eventusers = EventUser.where(user_id: current_user.id)
-		end
+		@events = Event.where(host_id: @user.id)
+		@eventusers = EventUser.where(user_id: @user.id)
+		@favorites = Favorite.where(user_id: @user.id)
+		@fav_event = @favorites.where(object: 'event')
+		@fav_style = @favorites.where(object: 'style')
 	end
 
 	# google calendar permission request
