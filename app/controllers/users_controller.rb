@@ -176,8 +176,8 @@ class UsersController < Clearance::UsersController
 			service.authorization = client
 			x = service.query_freebusy(body)
 			#
-			redirect_to(:back)
-			# byebug
+			# redirect_to(:back)
+			byebug
 			x.calendars[current_user.email].busy.each {|x| puts(x.start)}
 			#
 			# client.execute(
