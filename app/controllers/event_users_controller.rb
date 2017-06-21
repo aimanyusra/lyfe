@@ -14,11 +14,13 @@ class EventUsersController < ApplicationController
 	end
 
 	def edit
-		# just using this for making favorites
-		byebug
+		# just using this for making favorites for styles
+		Favorite.create(user_id: current_user.id, object: 'style', objectid: params[:id])
+		redirect_to styles_path
 	end
 
 	def update
+		# just using this for making favorites for events
 		Favorite.create(user_id: current_user.id, object: 'event', objectid: params[:id])
 		redirect_to events_path
 	end

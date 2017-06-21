@@ -1,9 +1,9 @@
 <h1><%= image_tag @user.avatar.thumb, class:"img-circle" %> <%= @user.first_name + ' ' + @user.last_name %></h1>
 <br>
 
-<% if current_user %>
+
 <%= link_to 'Make an Act', new_event_path %>
-<h1>Your Acts</h1>
+<h1><%= @user.first_name %> Acts</h1>
 <table>
   <thead>
     <tr>
@@ -41,9 +41,19 @@
 </table>
 
 <br>
-  <h1>You joined the following Acts</h1>
+  <h1><%= @user.first_name %> joined the following Acts</h1>
     <% @eventusers.each do |x| %>
     	<%= p Event.find(x.event_id).title %>
   	<br>
   	<%end%>
+
+
+<h1><%= @user.first_name %>'s favorite event </h1>
+<% @fav_event.each do |x|%> 
+<%= p Event.find(x.objectid).title %>
+<%end%>
+
+<h1><%= @user.first_name %>'s favorite style </h1>
+<% @fav_style.each do |x|%> 
+<%= p Style.find(x.objectid).name %>
 <%end%>

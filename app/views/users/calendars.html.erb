@@ -3,7 +3,9 @@
     <li><%= calendar.description %> (<%= calendar.id %>) <%= link_to "Show event", gevents_path(calendar.id) %></li>
   <% end %>
 </ul>
+<br>
+<%= link_to 'check busy times?', freebusy_path(calendar_id: current_user.email) %>
 
-<%= link_to 'check cal', freebusy_path(calendar_id: current_user.email) %>
 
-<iframe src="https://calendar.google.com/calendar/embed?src=<%=current_user.email%>&ctz=Asia/Kuala_Lumpur" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+<!-- <iframe src="https://calendar.google.com/calendar/embed?src=<%=current_user.email%>&ctz=Asia/Kuala_Lumpur" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
