@@ -146,20 +146,20 @@ class UsersController < Clearance::UsersController
 		# @client.authorization.refresh!
 		# byebug
 
+		# client = Signet::OAuth2::Client.new({
+		# 	client_id: ENV["GOOGLE_CLIENT_ID"],
+		# 	client_secret: ENV["GOOGLE_CLIENT_SECRET"],
+		# 	token_credential_uri: 'https://accounts.google.com/o/oauth2/token'
+		# })
+
 		client = Signet::OAuth2::Client.new({
 			client_id: ENV["GOOGLE_CLIENT_ID"],
 			client_secret: ENV["GOOGLE_CLIENT_SECRET"],
-			token_credential_uri: 'https://accounts.google.com/o/oauth2/token'
-		})
-
-		# client = Signet::OAuth2::Client.new({
-			# client_id: ENV["GOOGLE_CLIENT_ID"],
-			# client_secret: ENV["GOOGLE_CLIENT_SECRET"],
-			# authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
-			# # token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
-			# scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
-			# redirect_uri: callback_url
-	    # })
+			authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
+			# token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
+			scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
+			redirect_uri: callback_url
+	    })
 			# byebug
 		client.update!(session[:authorization])
 	  # return client
@@ -168,20 +168,23 @@ class UsersController < Clearance::UsersController
 	def freebusy
 		  client = init_client
 			body = Google::Apis::CalendarV3::FreeBusyRequest.new
-			body.items = [current_user.email]
+			body.items = [{id: current_user.email}]
 			body.time_min = "2017-06-01T13:00:00z"
 			body.time_max = "2017-06-29T21:00:00z"
+			# byebug
 			service = Google::Apis::CalendarV3::CalendarService.new
 			service.authorization = client
-			service.query_freebusy(body)
-			byebug
+			x = service.query_freebusy(body)
+			#
 			redirect_to(:back)
-
+			# byebug
+			x.calendars[current_user.email].busy.each {|x| puts(x.start)}
+			#
 			# client.execute(
-			#   :api_method => service.query_freebusy,
+			#   :api_method => service.freebusy.query,
 			#   :body => JSON.dump({
-			#     :timeMin => DateTime.now - 1.month,
-			#     :timeMax => DateTime.now + 1.month,
+			#     :timeMin => Time.now.utc.iso8601,
+			#     :timeMax => 3.days.from_now.utc.iso8601,
 			#     :items => [{'id' => 'jkcodetest@gmail.com'}]
 			#   }),
 			#   :headers => {'Content-Type' => 'application/json'})
