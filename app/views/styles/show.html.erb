@@ -1,15 +1,37 @@
-<div class="row">	
+<div class="container">
+
+	<div class="row">
+	 
+		<div class="col-sm-6 pull-right wow fadeInRightBig">
+	    <%= image_tag(@style.style_photos[2].image, class:"img-responsive") %>
+	  </div>
+	 
+	  <div class="col-sm-6 wow fadeInLeftBig"  data-animation-delay="200">   
+	              <h3 class="section-heading">Recommended Lyfe Style</h3>
+	    <p class="lead">A special thanks to Death to the Stock Photo for 
+			providing the photographs that you see in this template. 
+			</p>
+			
+			<ul class="descp lead2">
+				<li><strong><%= @style.name %></strong></li>
+				<li><strong>Price: </strong>$$</li>
+				<li><i class="glyphicon glyphicon-headphones"></i> Attach large file easily</li>
+			</ul>
+		</div>           
+	</div>
+</div>
+
+<div class="row toprow">	
 	<div class="container">
 		<div class="col col-sm-6 col-sm-offset-3">
 		<p id="notice"><%= notice %></p>
 
 		<p>
-		  <strong>Name:</strong>
-		  <%= @style.name %>
+
 		</p>
 
 		<p>
-		  <strong>Tags:</strong>
+		  <strong>Style Tags:</strong>
 		  <% @style.tags.each do |x| %>
 		  <%= x.desc %>
 		  <% end %>
@@ -22,7 +44,7 @@
 			<div class="col col-sm-6 col-sm-offset-3">
 				<div class="multiple-items">
 					<% @style.style_photos.each do |x| %>
-					<div><%= image_tag x.image.list %></div>
+					<div><a href= "<%= x.link %>" target="_blank" class="img"><%= image_tag x.image.list %><div class="slide-caption"><h5><%= x.name %></h5></div></a><h5 class="price">RM<span class="highlight-red"><%= x.price %></span></h5></div>
 					<% end %>
 				</div>
 
@@ -30,28 +52,5 @@
 				<%= link_to 'Back', styles_path %>
 			</div>
 		</div>
-	</div>
-</div>
-
-<div class="container">
-
-	<div class="row">
-	 
-		<div class="col-sm-6 pull-right wow fadeInRightBig">
-	    <%= image_tag(@style.style_photos[4].image, class:"img-responsive") %>
-	  </div>
-	 
-	  <div class="col-sm-6 wow fadeInLeftBig"  data-animation-delay="200">   
-	              <h3 class="section-heading">Recommended Lyfe Styles</h3>
-	    <p class="lead">A special thanks to Death to the Stock Photo for 
-			providing the photographs that you see in this template. 
-			</p>
-			
-			<ul class="descp lead2">
-				<li><i class="glyphicon glyphicon-signal"></i> Reliable and Secure Platform</li>
-				<li><i class="glyphicon glyphicon-refresh"></i> Everything is perfectly orgainized for future</li>
-				<li><i class="glyphicon glyphicon-headphones"></i> Attach large file easily</li>
-			</ul>
-		</div>           
 	</div>
 </div>
