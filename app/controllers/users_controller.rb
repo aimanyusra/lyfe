@@ -105,7 +105,6 @@ class UsersController < Clearance::UsersController
 
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = client
-    byebug
     @event_list = service.list_events(params[:calendar_id])
   end
 
