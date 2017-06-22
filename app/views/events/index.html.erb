@@ -109,14 +109,14 @@
             <td><%= link_to 'Edit', edit_event_path(event) %></td>
             <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <%end%>
-        
+
           <td><%= link_to 'Join', event_user_path(event), data: { confirm: 'You sure going?' } %></td>
 
           <!-- below 2 lines can put in controller -->
           <% @favorites = Favorite.where(object: 'event')%>
           <% @favorites = @favorites.where(objectid: event.id)%>
           <% if !@favorites.where(user_id: current_user.id).any? %>
-          
+
             <td><%= link_to 'Mark as favorite', event_user_path(event), method: :patch %></td>
           <% else %>
             <td>Already favorited</td>
@@ -165,7 +165,7 @@
   </thead>
 
   <tbody>
-    
+
       <tr>
         <td><%= event.title %></td>
         <td><%= event.status %></td>
@@ -183,7 +183,7 @@
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy attendence', event_user_path(event), method: :delete, data: { confirm: 'Not going?' } %></td>
       </tr>
-   
+
   </tbody>
 </table>
       </div>
@@ -262,22 +262,21 @@
 
 
 <div id="calendar"></div>
-
-  <script>
+<script>
   $(document).ready(function(){
     $('#calendar').fullCalendar({
       eventSources: [
         {
-          googleCalendarId: "<%=current_user.email%>",
-          googleCalendarApiKey: "AIzaSyDjN-X3JPQrfDbqYOx6xmxCrM6OCYWZzac",
-          color: "black",
-          borderColor: "blue"
-        },
-        {
           url: "/events.json",
           color: "green"
+        },
+        {
+          googleCalendarId: "<%= current_user.email%>",
+          googleCalendarApiKey: 'AIzaSyDjN-X3JPQrfDbqYOx6xmxCrM6OCYWZzac',
+          color: "black",
+          borderColor: "blue"
         }
       ]
     });
   });
-  </script>
+</script>

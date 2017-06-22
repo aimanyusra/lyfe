@@ -1,12 +1,12 @@
 /*
 Theme: Flatfy Theme
 Author: Andrea Galanti
-Bootstrap Version 
+Bootstrap Version
 Build: 1.0
 http://www.andreagalanti.it
 */
 
-@font-face {
+/*@font-face {
   font-family: 'Lato';
   src: url('../fonts/lato/lato-black.eot');
   src: url('../fonts/lato/lato-black.eot?#iefix') format('embedded-opentype'), url('../fonts/lato/lato-black.woff') format('woff'), url('../fonts/lato/lato-black.ttf') format('truetype'), url('../fonts/lato/lato-black.svg#latoblack') format('svg');
@@ -54,7 +54,7 @@ http://www.andreagalanti.it
   src: url('../fonts/flat-ui-icons-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/flat-ui-icons-regular.woff') format('woff'), url('../fonts/flat-ui-icons-regular.ttf') format('truetype'), url('../fonts/flat-ui-icons-regular.svg#flat-ui-icons-regular') format('svg');
   font-weight: normal;
   font-style: normal;
-}
+}*/
 
 /* Use the following CSS code if you want to use data attributes for inserting your icons */
 [data-icon]:before {
@@ -330,7 +330,7 @@ li{list-style-type:none}
 }
 @media (min-width: 768px) {
   .lead {
-	
+
   }
 }
 small,
@@ -4718,11 +4718,11 @@ footer p {
 /* All Mobile Sizes (devices and browser) */
 	@media only screen and (max-width: 767px) {
 		p{text-align: center;}
-		
+
 		h1, .h1 {
 			font-size: 50px;
 		}
-		
+
 		h3, .h3 {
 			font-size: 20px;
 			text-align:center
@@ -4749,27 +4749,27 @@ footer p {
 	}
 
 	@media only screen and (min-width: 768px) and (max-width: 959px) {
-		
-		
+
+
 		h1, .h1 {
 			font-size: 50px;
 		}
-		
+
 		h3, .h3 {
 			font-size: 20px;
-			
+
 		}
 		.col-sm-4 {margin-bottom: 120px; text-align:center;}
-		
+
 		.col-sm-5 {margin-top:120px}
 		.box-ct{text-align:center}
-		
+
 		.box-icon{margin: 0 auto;}
 		address{margin-top:80px;}
 		.address{text-align:center}
 		.footer-banner{display:none}
-		
-		
-		
-		
+
+
+
+
 	}
