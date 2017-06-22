@@ -1,0 +1,21 @@
+<br>
+<%= current_user.first_name %>
+<br>
+<%= @user.first_name %>
+
+<% (0..14).each do |x| %>
+  <br>
+  <%= p Date.today + x %>
+  <% if !Busy.where(day: Date.today + x).where(user_id: current_user.id).any? %>
+    <% if !Busy.where(day: Date.today + x).where(user_id: @user.id).any? %>
+      <p> Both are free today </p>
+      <p> Suggested event comes here </p>
+    <% end %>
+  <%else%>
+      <p> One or both of you are not free today </p>
+  <% end %>
+
+  <br>
+<% end %>
+
+<%= link_to 'Back', events_path %>

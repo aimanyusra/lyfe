@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :friends, only: [:show, :edit]
+  resources :compares, only: [:show]
+  resources :friends, only: [:index, :show, :edit, :update]
   resources :styles
   resources :event_users, only: [:show, :destroy, :edit, :update]
   resources :events

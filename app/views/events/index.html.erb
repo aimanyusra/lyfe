@@ -56,10 +56,13 @@
   <% Friend.where(status: 1).each do |x|%>
     <% if x.firstid == current_user.id %>
       <%= p User.find(x.secondid).first_name %>
+      <%= link_to 'Search for free dates', friend_path(x.secondid), method: :patch %>
     <%end%>
     <% if x.secondid == current_user.id %>
       <%= p User.find(x.firstid).first_name %>
+      <%= link_to 'Search for free dates', friend_path(x.firstid), method: :patch %>
     <%end%>
+
   <%end%>
 
 
@@ -173,11 +176,11 @@
         <td><%= event.start_date.strftime("%d-%m-%Y") %></td>
         <td><%= event.end_date.strftime("%d-%m-%Y")  %></td>
         <td><%= event.location %></td>
-        <td><%= event.time %></td>
+        <td><%=  %></td>
         <td><%= event.age_limit %></td>
         <td><%= event.price %></td>
         <td><%= event.state %></td>
-        <td><%= event.country %></td>
+        <td><%=  %></td>
         <td><%= event.tags.each { |t| t}  %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
