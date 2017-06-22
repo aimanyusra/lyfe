@@ -1,7 +1,7 @@
 <div class="container">
 
 	<div class="row">
-	 
+	 		<p id="notice"><%= notice %></p>
 		<div class="col-sm-6 pull-right wow fadeInRightBig">
 	    <% @style.style_photos.where("name IS NULL").each do |x| %>
 				<%= image_tag x.image %>
@@ -17,6 +17,18 @@
 				<li><strong><%= @style.name %></strong></li>
 				<li><strong>Price: </strong><%= @style.price %></li>
 			</ul>
+				<h3>Shop the look</h3>
+				<div class="multiple-items">
+					<% @style.style_photos.where("name IS NOT NULL").each do |x| %>
+					<div><a href= "<%= x.link %>" target="_blank" class="img"><%= image_tag x.image.list, class: "carousel-img" %><div class="slide-caption"><h5><%= x.name %></h5></div></a><h5 class="price">RM<span class="highlight-red"><%= x.price %></span></h5></div>
+					<% end %>
+				</div>
+						<p>
+		  <strong>Style Tags:</strong>
+		  <% @style.tags.each do |x| %>
+		  <%= x.desc %>
+		  <% end %>
+		</p>
 		</div>           
 	</div>
 </div>
@@ -24,7 +36,7 @@
 <div class="row toprow">	
 	<div class="container">
 		<div class="col col-sm-6 col-sm-offset-3">
-		<p id="notice"><%= notice %></p>
+
 
 		<p>
 
@@ -35,19 +47,6 @@
 	<div class="row">
 		<div class="container">
 			<div class="col col-sm-6 col-sm-offset-3">
-			<h3>Shop the look</h3>
-				<div class="multiple-items">
-					<% @style.style_photos.where("name IS NOT NULL").each do |x| %>
-					<div><a href= "<%= x.link %>" target="_blank" class="img"><%= image_tag x.image.list %><div class="slide-caption"><h5><%= x.name %></h5></div></a><h5 class="price">RM<span class="highlight-red"><%= x.price %></span></h5></div>
-					<% end %>
-				</div>
-
-						<p>
-		  <strong>Style Tags:</strong>
-		  <% @style.tags.each do |x| %>
-		  <%= x.desc %>
-		  <% end %>
-		</p>
 
 				<%= link_to 'Edit', edit_style_path(@style) %> |
 				<%= link_to 'Back', styles_path %>

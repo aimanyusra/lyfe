@@ -107,6 +107,10 @@ margin: auto;
 
 /*own carousel */
 
+.carousel-img {
+	padding-left: 20px;
+}
+
 #owl-demo .item{
   margin: 3px;
 }

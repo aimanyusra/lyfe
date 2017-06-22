@@ -70,7 +70,7 @@ class EventsController < ApplicationController
       @tag = Tag.create(desc: x)
       @event.tags << @tag
     end
-    # EventTag.create(event_id: @event.id, tag_id: @tag.id)
+    EventTag.create(event_id: @event.id, tag_id: @tag.id)
 
    respond_to do |format|
      if @event.save
