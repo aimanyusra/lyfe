@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20170621222500) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.string   "images",     default: [],              array: true
+    t.string   "price"
     t.index ["user_id"], name: "index_styles_on_user_id", using: :btree
   end
 

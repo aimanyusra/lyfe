@@ -16,7 +16,6 @@
                         <div class="meta">
                             <a>STATE : <%= event.state %></a><br>
                             <a>DATE : <%= event.start_time.strftime("%d-%m-%Y") %></a><br>
-                            
                         </div>
                         <div class="card-text">
                         <%= event.description %>
@@ -24,7 +23,7 @@
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-secondary float-right btn-sm"><%= link_to event do %>SHOW<% end %></button>
-                        <button class="btn btn-secondary float-right btn-sm"><%= link_to event_user_path(event), data: { confirm: 'You sure going?' } do %>JOIN<% end %></button>
+                        <button class="btn btn-secondary float-right btn-sm"><%= link_to event_user_path(event), data: { confirm: 'Confirm attendance?' } do %>JOIN<% end %></button>
                     </div>
                 </div>
                <br>
@@ -228,8 +227,6 @@
         <td><%= event.title %></td>
         <td><%= event.status %></td>
         <td><%= event.description %></td>
-        <td><%= event.start_date.strftime("%d-%m-%Y") %></td>
-        <td><%= event.end_date.strftime("%d-%m-%Y")  %></td>
         <td><%= event.location %></td>
         <td><%= event.start_time %></td>
         <td><%= event.end_time %></td>
@@ -265,21 +262,11 @@
 
 
 <div id="calendar"></div>
+
   <script>
   $(document).ready(function(){
     $('#calendar').fullCalendar({
       eventSources: [
-        {
-          googleCalendarId: 'en.malaysia#holiday@group.v.calendar.google.com',
-          googleCalendarApiKey: "AIzaSyDjN-X3JPQrfDbqYOx6xmxCrM6OCYWZzac",
-          color: 'pink'
-        },
-        {
-          googleCalendarId: "junkheng@gmail.com",
-          googleCalendarApiKey: "AIzaSyDjN-X3JPQrfDbqYOx6xmxCrM6OCYWZzac",
-          color: "black",
-          borderColor: "blue"
-        },
         {
           googleCalendarId: "<%=current_user.email%>",
           googleCalendarApiKey: "AIzaSyDjN-X3JPQrfDbqYOx6xmxCrM6OCYWZzac",

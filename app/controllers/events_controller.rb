@@ -98,8 +98,7 @@ class EventsController < ApplicationController
         @tag = Tag.create(desc: x)
       end
       @event.tags << @tag
-      byebug
-      EventTag.create(event_id: @event.id, tag_id: @tag.id)
+      # EventTag.create(event_id: @event.id, tag_id: @tag.id)
     end
 
 
@@ -133,7 +132,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :status, :description, :start_date, :end_date, :location, :start_time, :end_time, :age_limit, :price, :host_id, :tags, event_photos_attributes: [:id, :event_id, :image])
+      params.require(:event).permit(:title, :status, :description, :start_date, :end_date, :location, :start_time, :end_time, :age_limit, :price, :host_id, event_photos_attributes: [:id, :event_id, :image])
     end
 
     def event_params2

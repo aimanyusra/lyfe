@@ -27,7 +27,7 @@ class StylesController < ApplicationController
     @style = Style.new()
     @style.name = style_params['name']
     @style.user_id = current_user.id
-    tag_array = style_params['tags'].split(',')
+    tag_array = style_params2['tags'].split(',')
     tag_array.each do |x|     
       if Tag.find_by(desc: x)
         @tag = Tag.find_by(desc: x)
@@ -35,11 +35,14 @@ class StylesController < ApplicationController
         @tag = Tag.create(desc: x)
       end
        @style.tags << @tag
-      StyleTag.create(style_id: @style.id, tag_id: @tag.id)
+        # StyleTag.create(style_id: @style.id, tag_id: @tag.id)
     end
 
     respond_to do |format|
       if @style.save
+        params[:style]['images'].each do |a|
+        @style_photo = @style.style_photos.create!(:image => a, :style_id => @style.id)
+       end
         format.html { redirect_to @style, notice: 'Style was successfully created.' }
         format.json { render :show, status: :created, location: @style }
       else
@@ -52,6 +55,17 @@ class StylesController < ApplicationController
   # PATCH/PUT /styles/1
   # PATCH/PUT /styles/1.json
   def update
+    tag_array = style_params2['tags'].split(',')
+    tag_array.each do |x|     
+      if Tag.find_by(desc: x)
+        @tag = Tag.find_by(desc: x)
+      else
+        @tag = Tag.create(desc: x)
+      end
+       @style.tags << @tag
+        # StyleTag.create(style_id: @style.id, tag_id: @tag.id)
+    end
+
     respond_to do |format|
       if @style.update(style_params)
         format.html { redirect_to @style, notice: 'Style was successfully updated.' }
@@ -81,6 +95,10 @@ class StylesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def style_params
-      params.require(:style).permit(:name, :tags, :user_id)
+      params.require(:style).permit(:name, :user_id, style_photos_attributes: [:id, :style_id, :image])
+    end
+
+    def style_params2
+      params.require(:style).permit(:tags)
     end
 end

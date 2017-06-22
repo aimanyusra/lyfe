@@ -1,21 +1,56 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<p>
-  <strong>Name:</strong>
-  <%= @style.name %>
-</p>
+	<div class="row">
+	 		<p id="notice"><%= notice %></p>
+		<div class="col-sm-6 pull-right wow fadeInRightBig">
+	    <% @style.style_photos.where("name IS NULL").each do |x| %>
+				<%= image_tag x.image %>
+			<% end %>
+	  </div>
+	 
+	  <div class="col-sm-6 wow fadeInLeftBig"  data-animation-delay="200">   
+	              <h3 class="section-heading">Recommended Lyfe Style</h3>
+	    <p class="lead">
+			</p>
+			
+			<ul class="descp lead2">
+				<li><strong><%= @style.name %></strong></li>
+				<li><strong>Price: </strong><%= @style.price %></li>
+			</ul>
+				<h3>Shop the look</h3>
+				<div class="multiple-items">
+					<% @style.style_photos.where("name IS NOT NULL").each do |x| %>
+					<div><a href= "<%= x.link %>" target="_blank" class="img"><%= image_tag x.image.list, class: "carousel-img" %><div class="slide-caption"><h5><%= x.name %></h5></div></a><h5 class="price">RM<span class="highlight-red"><%= x.price %></span></h5></div>
+					<% end %>
+				</div>
+						<p>
+		  <strong>Style Tags:</strong>
+		  <% @style.tags.each do |x| %>
+		  <%= x.desc %>
+		  <% end %>
+		</p>
+		</div>           
+	</div>
+</div>
 
-<p>
-  <strong>Tags:</strong>
-  <% @style.tags.each do |x| %>
-  <%= x.desc %>
-  <% end %>
-</p>
+<div class="row toprow">	
+	<div class="container">
+		<div class="col col-sm-6 col-sm-offset-3">
 
-<p>
-  <strong>User:</strong>
-  <%= @style.user %>
-</p>
 
-<%= link_to 'Edit', edit_style_path(@style) %> |
-<%= link_to 'Back', styles_path %>
+		<p>
+
+		</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="container">
+			<div class="col col-sm-6 col-sm-offset-3">
+
+				<%= link_to 'Edit', edit_style_path(@style) %> |
+				<%= link_to 'Back', styles_path %>
+			</div>
+		</div>
+	</div>
+</div>

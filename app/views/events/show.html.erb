@@ -1,95 +1,99 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="container">
+    <div class="col col-sm-6 col-sm-offset-3">
+      <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
+      <p>
+        <strong>Title:</strong>
+        <%= @event.title %>
+      </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @event.status %>
-</p>
+      <p>
+        <strong>Status:</strong>
+        <%= @event.status %>
+      </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
+      <p>
+        <strong>Description:</strong>
+        <%= @event.description %>
+      </p>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @event.start_date.strftime("%d-%m-%Y") %>
-</p>
+      <p>
+        <strong>Start date:</strong>
+        <%= @event.start_time.strftime("%d-%m-%Y") %>
+      </p>
 
-<p>
-  <strong>End date:</strong>
-  <%= @event.end_date.strftime("%d-%m-%Y") %>
-</p>
+      <p>
+        <strong>End date:</strong>
+        <%= @event.end_time.strftime("%d-%m-%Y") %>
+      </p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @event.location %>
-</p>
+      <p>
+        <strong>Location:</strong>
+        <%= @event.location %>
+      </p>
 
-<p>
-  <strong>Time:</strong>
-  <%= @event.time %>
-</p>
+      <p>
+        <strong>Age limit:</strong>
+        <%= @event.age_limit %>
+      </p>
 
-<p>
-  <strong>Age limit:</strong>
-  <%= @event.age_limit %>
-</p>
+      <p>
+        <strong>Price:</strong>
+        <%= @event.price %>
+      </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @event.price %>
-</p>
+      <p>
+        <strong>Tags:</strong>
+        <% @event.tags.each do |x| %>
+        <%= x.desc %>
+        <% end %>
+      </p>
 
-<p>
-  <strong>Tags:</strong>
-  <% @event.tags.each do |x| %>
-  <%= x.desc %>
-  <% end %>
-</p>
+      <p>
+        <strong>Current Participating Members:</strong>
+        <%= @joined%>
+      </p>
 
-<p>
-  <strong>Current Participating Members:</strong>
-  <%= @joined%>
-</p>
 
-          <% @event.event_photos.each do |x| %>
-            <div><%= image_tag x.image.carousel %></div>
+              <div class="multiple-items">
+                <% @event.event_photos.each do |x| %>
+                <div><%= image_tag x.image.list, class: "carousel-img" %></div>
+                <% end %>
+              </div>
+
+
+      <% if signed_in? %>
+      <%= link_to 'Join', event_user_path(@event), data: { confirm: 'You sure going?' } %>
+      <% else %>
+        <p>Please sign in to attend event <%= link_to t(".sign_in"), sign_in_path %></p>
+      <% end %>
+      <%#= link_to 'Edit', edit_event_path(@event) %> 
+      <%= link_to 'Back', events_path %>
+
+      <h3>Recommended Lyfe Style for this Act</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Tags</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @styles.each do |style| %>
+            <tr>
+              <td><%= style.name %></td>
+              <td><%= style.tags.first.desc %></td>        
+              <td><%= link_to 'Show', style %></td>
+              <td><%= link_to 'Edit', edit_style_path(style) %></td>
+              <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
           <% end %>
-
-
-<% if signed_in? %>
-<%= link_to 'Join', event_user_path(@event), data: { confirm: 'You sure going?' } %>
-<% else %>
-  <p>Please sign in to attend event <%= link_to t(".sign_in"), sign_in_path %></p>
-<% end %>
-<%#= link_to 'Edit', edit_event_path(@event) %> 
-<%= link_to 'Back', events_path %>
-
-<h1>Related Styles</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Tags</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @styles.each do |style| %>
-      <tr>
-        <td><%= style.name %></td>
-        <td><%= style.tags.first.desc %></td>        
-        <td><%= link_to 'Show', style %></td>
-        <td><%= link_to 'Edit', edit_style_path(style) %></td>
-        <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        </tbody>
+      </table>
+    </div>
+  </div> 
+</div>  

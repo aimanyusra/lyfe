@@ -55,6 +55,8 @@ gem "fog"
 gem "mini_magick"
 # font awesome for icons
 gem "font-awesome-rails"
+# carousel
+gem "jquery-slick-rails" 
 
 
 group :development, :test do

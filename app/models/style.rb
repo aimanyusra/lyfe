@@ -3,4 +3,6 @@ class Style < ApplicationRecord
 
   has_many :style_tags
   has_many :tags, through: :style_tags
+
+  has_many :style_photos
 end
