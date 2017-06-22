@@ -176,8 +176,8 @@ class UsersController < Clearance::UsersController
 			service.authorization = client
 			x = service.query_freebusy(body)
 			#
-			# redirect_to(:back)			
-			x.calendars['junkheng@gmail.com'].busy.each do |x| 				
+			# redirect_to(:back)
+			x.calendars['junkheng@gmail.com'].busy.each do |x|
 				(x.start.to_date..x.end.to_date).each do |y|
 					if !Busy.where(user_id: current_user.id).where(day: y).any?
 					  Busy.create(user_id: current_user.id, day: y)
@@ -185,7 +185,6 @@ class UsersController < Clearance::UsersController
 				end
 				puts(x.start)
 			end
-			byebug
 			#
 			# client.execute(
 			#   :api_method => service.freebusy.query,
