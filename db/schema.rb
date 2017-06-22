@@ -68,9 +68,9 @@ ActiveRecord::Schema.define(version: 20170621222500) do
     t.string   "status"
     t.string   "tags",        default: [],              array: true
     t.string   "images",      default: [],              array: true
-    t.string   "state"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.string   "state"
   end
 
   create_table "favorites", force: :cascade do |t|
