@@ -27,7 +27,7 @@ class StylesController < ApplicationController
     @style = Style.new()
     @style.name = style_params['name']
     @style.user_id = current_user.id
-    tag_array = style_params['tags'].split(',')
+    tag_array = style_params2['tags'].split(',')
     tag_array.each do |x|     
       if Tag.find_by(desc: x)
         @tag = Tag.find_by(desc: x)
@@ -55,7 +55,7 @@ class StylesController < ApplicationController
   # PATCH/PUT /styles/1
   # PATCH/PUT /styles/1.json
   def update
-        tag_array = style_params2['tags'].split(',')
+    tag_array = style_params2['tags'].split(',')
     tag_array.each do |x|     
       if Tag.find_by(desc: x)
         @tag = Tag.find_by(desc: x)
