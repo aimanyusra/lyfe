@@ -19,12 +19,12 @@
 				</ul> -->
 				<br>
 				<div class="col-lg-6 col-md-offset-3">
-			    <div class="input-group">
+<!-- 			    <div class="input-group">
 			      <input type="text" class="form-control" placeholder="Search for... Acts, Styles">
 			      <span class="input-group-btn">
 			        <button class="btn btn-default" type="button">Go!</button>
 			      </span>
-			    </div><!-- /input-group -->
+			    </div> --><!-- /input-group -->
 			  </div><!-- /.col-lg-6 -->
 			</div> 
 
@@ -37,7 +37,7 @@
 
 			<div class="col-md-6 col-md-offset-3 text-center wrap_title">
 				<h2>Lyfe Acts</h2>
-				<p class="lead" style="margin-top:0">Trending events in your area.</p>
+				<p class="lead" style="margin-top:0">We have upcoming acts available!</p>
 				
 			</div>
 			
@@ -50,8 +50,8 @@
 				</div>
 
 				<div class="col col-md-3">
-					<button class="btn btn-lg btn-default"><i class="fa fa-google" aria-hidden="true"></i>
- Sync Google Calendar</button>
+				<p>Interested in these events? </p>
+				<%= button_to 'Sync Google Calendar', redirect_path, method: :get %>
 				</div>
 			</div><!-- /.row -->
 		</div>
