@@ -168,7 +168,7 @@ class UsersController < Clearance::UsersController
 	def freebusy
 		  client = init_client
 			body = Google::Apis::CalendarV3::FreeBusyRequest.new
-			body.items = [{id: current_user.email}]
+			body.items = [{id: current_user.email}, {id: "junkheng@gmail.com"}]
 			body.time_min = "2017-06-01T13:00:00z"
 			body.time_max = "2017-06-29T21:00:00z"
 			# byebug
@@ -176,9 +176,16 @@ class UsersController < Clearance::UsersController
 			service.authorization = client
 			x = service.query_freebusy(body)
 			#
-			# redirect_to(:back)
+			# redirect_to(:back)			
+			x.calendars['junkheng@gmail.com'].busy.each do |x| 				
+				(x.start.to_date..x.end.to_date).each do |y|
+					if !Busy.where(user_id: current_user.id).where(day: y).any?
+					  Busy.create(user_id: current_user.id, day: y)
+					end
+				end
+				puts(x.start)
+			end
 			byebug
-			x.calendars[current_user.email].busy.each {|x| puts(x.start)}
 			#
 			# client.execute(
 			#   :api_method => service.freebusy.query,
